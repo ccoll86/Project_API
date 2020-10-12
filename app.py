@@ -3,6 +3,7 @@ from flask import Flask,jsonify, Response
 #instantiate the Flask object
 app = Flask(__name__)
 
+#index of Flask
 @app.route("/")
 def index():
 	return "Welcome to the Project 5 API"
