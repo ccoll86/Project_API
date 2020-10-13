@@ -24,6 +24,19 @@ def factorial(resl = 'reslult'):
     return f'Output: {resl}'
 
 
+# Fibonacci endpoint
+@app.route('/fibonacci/<int>')
+def Fibonacci(n):
+    a,b=0,1
+    if n<=0:
+        print("Incorrect input")
+    while (a<=n):
+        print(a,end=' ')
+        a,b=b,a+b
+    return jsonify()
+print(Fibonacci(int(input('enter number: ')))) 
+
+
 
 #  prime check endpoint
 @app.route('/is-prime/<int:n>')
