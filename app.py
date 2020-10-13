@@ -1,4 +1,5 @@
 from flask import Flask,jsonify, Response
+import math
 
 #instantiate the Flask object
 app = Flask(__name__)
@@ -12,6 +13,15 @@ def index():
 def get_md5(input):
 	res = hashlib.md5(input.encode())
 	return jsonify({'Hash': str(res.hexdigest())})
+
+
+# Factorial endpoint
+@app.route('/factorial/')
+def factorial(resl = 'reslult'):
+    num = int(input('Input a number to complete factorial: '))
+    resl = math.factorial(num)
+    return f'Output: {resl}'
+
 
 
 #  prime check endpoint
