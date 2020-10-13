@@ -1,5 +1,6 @@
 from flask import Flask,jsonify, Response
 import math
+import hashlib
 
 #instantiate the Flask object
 app = Flask(__name__)
