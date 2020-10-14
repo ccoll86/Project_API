@@ -14,8 +14,8 @@ def index():
 def get_md5(input):
 	res = hashlib.md5(input.encode())
 	return jsonify(
-        f'input:{input}',
-        {'Hash': str(res.hexdigest())}
+        f"input: {input}",
+        f"output: {str(res.hexdigest())}"
     )
 
 
