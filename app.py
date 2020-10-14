@@ -62,6 +62,18 @@ def prime_check(n):
             f"{x}"
             )
 
+@app.route('/slack-alert/<string:x>')
+def slack_alert(x):
+    from slackclient import SlackClient
+
+    slack_token = os.environ['xoxb-73266387591-1450694768528-LCKQlzoPkr1ueW2gkfyyW2t3']
+    sc = SlackClient(slack_token)
+
+    sc.api_call(
+        "chat.postMessage",
+        channel="#group1",
+        text="Hello from Python! :tada:"
+)
 
 
 if __name__ == '__main__':
