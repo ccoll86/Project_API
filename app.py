@@ -20,13 +20,12 @@ def get_md5(input):
 
 
 # Factorial endpoint
-@app.route('/factorial/')
-def factorial(resl = 'reslult'):
-    num = int(input('Input a number to complete factorial: '))
-    resl = math.factorial(num)
+@app.route('/factorial/<int:n>')
+def factorial(n):
+    resl = math.factorial(n)
     return jsonify(
-        f'Input: {num}', 
-        f'Output: {resl}'
+        f"Input: {n}", 
+        f"Output: {resl}"
 
     )
 
