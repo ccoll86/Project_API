@@ -1,9 +1,15 @@
-from flask import Flask,jsonify, Response
+from flask import Flask,jsonify, Response, request
 import math
 import hashlib
+from slackclient import SlackClient
+import requests
 
 #instantiate the Flask object
 app = Flask(__name__)
+
+#URL used for Slack bot
+SLACK_URL = 'https://hooks.slack.com/services/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'
+
 
 @app.route("/")
 def index():
@@ -61,21 +67,26 @@ def prime_check(n):
             x = "True"
 
         return jsonify(
-            f"{x}"
+            f"input: {n}",
+            f"output: {x}"
             )
 
+#slack-alert endpoint
 @app.route('/slack-alert/<string:x>')
-def slack_alert(x):
-    from slackclient import SlackClient
-
-    slack_token = os.environ['xoxb-73266387591-1450694768528-LCKQlzoPkr1ueW2gkfyyW2t3']
-    sc = SlackClient(slack_token)
-
-    sc.api_call(
-        "chat.postMessage",
-        channel="#group1",
-        text="Hello from Python! :tada:"
-)
+def slack_post(x):
+    data = { 'text' : x }
+    resp = requests.post(SLACK_URL, json=data)
+    if resp.status_code == 200:
+        result = True
+        verification = "Your message was sent succesfully."
+    else:
+        result = False
+        verification = "Unable to post your message."
+    return jsonify(
+    input=x,
+    message=verification,
+    output=result
+    ), 200 if resp.status_code==200 else 400
 
 
 if __name__ == '__main__':
