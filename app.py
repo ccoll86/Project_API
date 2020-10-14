@@ -24,8 +24,8 @@ def get_md5(input):
 def factorial(n):
     resl = math.factorial(n)
     return jsonify(
-        f"Input: {n}", 
-        f"Output: {resl}"
+        f"input: {n}", 
+        f"output: {resl}"
 
     )
 
