@@ -31,10 +31,12 @@ def factorial(resl = 'reslult'):
 @app.route('/fibonacci/<int:n>', methods=['GET'])
 def get_fibonacci(n):
     a,b=0,1
+    result1=[]
+
     while (a<=n):
         print(a,end=' ')
         a,b=b,a+b
-        print()
+        result1.append()
     if n<=0:
         print("Incorrect input, please put a positive number")
     
@@ -42,9 +44,8 @@ def get_fibonacci(n):
 
         return jsonify(
             f'Original Number:{n}',
-            f'Fibonacci Sequence:{get_fibonacci}'
+            f'Fibonacci order:{result1}'
         )
-
 
 
 #  prime check endpoint
