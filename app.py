@@ -10,6 +10,7 @@ def index():
 	return "Welcome to the Project 5 API"
 
 # md5 hash converter
+@app.route('/md5/<string:input>', methods=['GET'])
 def get_md5(input):
 	res = hashlib.md5(input.encode())
 	return jsonify(
