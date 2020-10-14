@@ -45,8 +45,8 @@ def fib(n):
     else:
 
         return jsonify(
-            f'Original Number:{n}',
-            f'Fibonacci order:{array}'
+            f"Input:{n}",
+            f"Output:{array}"
         )
 
 #  prime check endpoint
