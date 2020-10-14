@@ -9,11 +9,13 @@ app = Flask(__name__)
 def index():
 	return "Welcome to the Project 5 API"
 
-# mb5 hash converter
-@app.route('/md5/<string:input>', methods=['GET'])
+# md5 hash converter
 def get_md5(input):
 	res = hashlib.md5(input.encode())
-	return jsonify({'Hash': str(res.hexdigest())})
+	return jsonify(
+        f'input:{input}',
+        {'Hash': str(res.hexdigest())}
+    )
 
 
 # Factorial endpoint
