@@ -28,19 +28,22 @@ def factorial(resl = 'reslult'):
     )
 
 # Fibonacci endpoint
-@app.route('/fibonacci/<int:n>')
-def Fibonacci(n):
+@app.route('/fibonacci/<int:n>', methods=['GET'])
+def get_fibonacci(n):
     a,b=0,1
-    if n<=0:
-        print("Incorrect input, please put a positive number")
     while (a<=n):
         print(a,end=' ')
         a,b=b,a+b
-    return jsonify({
-	    'Input: (n)',
-	    'Output: (Fibonacci(n))'
-		  })
- 
+        print()
+    if n<=0:
+        print("Incorrect input, please put a positive number")
+    
+    else:
+
+        return jsonify(
+            f'Original Number:{n}',
+            f'Fibonacci Sequence:{get_fibonacci}'
+        )
 
 
 
