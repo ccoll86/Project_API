@@ -44,8 +44,8 @@ def fib(n):
     else:
 
         return jsonify(
-            f"Input:{n}",
-            f"Output:{array}"
+            f"Input: {n}",
+            f"Output: {array}"
         )
 
 #  prime check endpoint
