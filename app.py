@@ -19,21 +19,14 @@ def index():
 @app.route('/md5/<string:input>', methods=['GET'])
 def get_md5(input):
 	res = hashlib.md5(input.encode())
-	return jsonify(
-        f"input: {input}",
-        f"output: {str(res.hexdigest())}"
-    )
-
+	return jsonify(input=input, output=str(res.hexdigest()))
 
 # Factorial endpoint
 @app.route('/factorial/<int:n>')
 def factorial(n):
     resl = math.factorial(n)
-    return jsonify(
-        f"input: {n}", 
-        f"output: {resl}"
+    return jsonify(input=n, output=res1)
 
-    )
 
 # Fibonacci endpoint
 @app.route('/fibonacci/<int:n>', methods=['GET'])
@@ -49,10 +42,7 @@ def fib(n):
     
     else:
 
-        return jsonify(
-            f"input: {n}",
-            f"output: {array}"
-        )
+        return jsonify(input=n, output=array)
 
 #  prime check endpoint
 @app.route('/is-prime/<int:n>')
@@ -66,10 +56,7 @@ def prime_check(n):
         else:
             x = "True"
 
-        return jsonify(
-            f"input: {n}",
-            f"output: {x}"
-            )
+        return jsonify(input=n, output=x)
 
 #slack-alert endpoint
 @app.route('/slack-alert/<string:x>')
