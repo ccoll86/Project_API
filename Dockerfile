@@ -6,7 +6,7 @@
 #|___/ \___/ \___|_|\_\___|_|  |_| |_|_|\___|
 
 # Use an official Python runtime as a parent image
-FROM python:3.8-slim
+FROM python:3.8-alpine
 
 # Set up a working directory in /app
 WORKDIR /app
