@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 
 #URL used for Slack bot
-SLACK_URL = 'https://hooks.slack.com/services/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'
+SLACK_URL = 'https://hooks.slack.com/services/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'
 
 #--------------App Routes--------------#
 @app.route("/")
@@ -131,16 +131,19 @@ def fib(n):
 #--------------prime endpoint--------------#
 @app.route('/is-prime/<int:n>')
 def prime_check(n):
-    if n > 1: 
-        for i in range(2, n):
-            if (n % i) == 0:
-                x = "False"
-                break
-                
-        else:
-            x = "True"
-
-        return jsonify(input=n, output=x)
+    number = isinstance(n, int)
+    if number == True:
+        if n > 1: 
+            for i in range(2, n):
+                if (n % i) == 0:
+                    return jsonify(input=n, output=False)
+            return jsonify(input=n, output=True)
+        elif(n == 0):
+            return jsonify(input=n, output=False)            
+        elif(n == 1):
+            return jsonify(input=n, output=False)             
+    else: 
+        return jsonify(input=n, output=True)
 
 
 @app.route('/keyval/<string>')
