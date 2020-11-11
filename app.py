@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 
 #URL used for Slack bot
-SLACK_URL = 'https://hooks.slack.com/services/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'
+SLACK_URL = 'https://hooks.slack.com/services/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'
 
 #--------------App Routes--------------#
 @app.route("/")
