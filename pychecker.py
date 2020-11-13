@@ -4,7 +4,6 @@ HOST = "http://34.121.122.205:5000"
 
 
 #----------------Here is the new script---------------------
-import requests
 
 test = requests.get(http/34.121.122.205:5000/md5/test)
 expected result =
