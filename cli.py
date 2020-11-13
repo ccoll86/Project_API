@@ -1,11 +1,14 @@
 #--------------CLI--------------#
+#imports needed to run the code
 import requests
 import sys
 import argparse
 import textwrap
 
+#IP address to the VM
 HOST = "34.121.122.205"
 
+#The pop up that will show the options and knowing to add h for help
 parser = argparse.ArgumentParser( 
     formatter_class=argparse.RawDescriptionHelpFormatter,description=textwrap.dedent('''
                               ~ Group 1 Tool Commands ~
@@ -21,6 +24,8 @@ parser = argparse.ArgumentParser(
 parser.print_help()
 
 subparsers = parser.add_subparsers(help='commands', dest='cli')
+
+###if __name__ == '__main__':####
 
 #Creating all parsers for the API functions
 #md5
@@ -49,30 +54,31 @@ keyval_parser.add_argument('-delete', help='Use to delete key (and value) suppli
 
 
 args = parser.parse_args()
+#parser for md5
 def md5():
     if args.cli == 'md5':
         input_md5string = args.md5_string
         md5=requests.get(HOST + input_md5string)
         print(md5.text)
-
+#parser for factorial
 def factorial():
     if args.cli == 'factorial':
         input_factint = args.fact_int
         factorial=requests.get(HOST + input_factint)
         print(factorial.text)
-	
+#parser for fibonacci
 def fibonacci():
     if args.cli == 'fibonacci':
         input_fibint = args.fib_int
         fibonacci=requests.get(HOST + input_fibint)
         print(fibonacci.text)
-
+#parser for prime
 def prime():
     if args.cli == 'prime':
         input_primeint = args.prime_int
         prime=requests.get(HOST+input_primeint)
         print(prime.text)
-
+#parser for keyvals
 def keyval():
     if args.cli == 'keyval':
         if args.cli == '-post':
