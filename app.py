@@ -6,6 +6,9 @@ import requests
 from redis import Redis, RedisError
 import redis
 from collections import defaultdict
+from argparse import ArgumentParser
+from pprint import pprint
+import csv
 
 #--------------instantiate the Flask object--------------#
 app = Flask(__name__)
@@ -26,12 +29,6 @@ red = redis.Redis(host='redis', port=6379, db=0)
 
 #--------------CLI--------------#
 @app.route('/CLI/<int:n>')
-from argparse import ArgumentParser
-import csv
-import json
-from pprint import pprint
-import requests
-
 
 def read():
    product_list_url = 'http://localhost:5000/'
