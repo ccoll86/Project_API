@@ -6,9 +6,6 @@ import requests
 from redis import Redis, RedisError
 import redis
 from collections import defaultdict
-from argparse import ArgumentParser
-from pprint import pprint
-import csv
 
 #--------------instantiate the Flask object--------------#
 app = Flask(__name__)
