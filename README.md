@@ -1,4 +1,4 @@
-# Project_5
+# Project_API
 The goal of this project will be to build a simple REST API in Python and containerize it using Docker. This container image will then be uploaded to the Docker public repository and I will be downloading this image to run it in my local Docker environment for testing.
 
 
