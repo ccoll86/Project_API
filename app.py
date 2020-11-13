@@ -27,6 +27,109 @@ def index():
 red = redis.Redis(host='redis', port=6379, db=0)
 
 
+@app.route('/keyval', methods=['POST'])
+def test4():
+    payload = request.get_json()
+    key = payload['key']
+    value = payload['value']
+    if key in redis:
+        JSON1 = {
+         'key': key,
+         'value': value, 
+         'command': "CREATE: {}".format(key),
+         'result': False,
+         'error':"Unable to add pair key exists"
+         }
+        return JSON1, 404 
+
+    else:
+        redis.set(key, value), 200 
+
+    JSON = {
+         'key': key,
+         'value': value, 
+         'command': "CREATE: {}".format(key),
+         'result': True
+         }
+
+    return JSON  
+
+
+@app.route('/keyval', methods=['PUT'])
+def test5():
+    payload = request.get_json()
+    key = payload['key']
+    value = payload['value']
+    if redis.exists(key):
+        redis.set(key, value) 
+        JSON1 = {
+         'key': key,
+         'value': value, 
+         'command': "Update: {}".format(key),
+         'result': True
+         }
+        return JSON1, 200 
+
+    else:
+
+        JSON = {
+         'key': key,
+         'value': value, 
+         'command': "UPDATE: {}".format(key),
+         'result': False,
+         'error':"Unable to update key does not exist",
+         }
+
+    return JSON, 404 
+
+@app.route('/keyval/<string:key>', methods=['GET'])
+def key_value_retrieve(key):
+    if key in redis:
+        redis.get(key)
+        JSON1 = {
+         'key': key,
+         'value': None, 
+         'command': "Retrieve: {}".format(key),
+         'result': True
+         }
+        return JSON1, 200 
+    else:
+        JSON = {
+         'key': key,
+         'value': None, 
+         'command': "Retrieve: {}".format(key),
+         'result': False,
+         'error':"Unable to retrieve, key does not exist",
+         }
+
+    return JSON, 404 
+
+
+@app.route('/keyval/<string:key>', methods=['DELETE'])
+def key_value_delete(key):
+    if key in redis:
+        redis.delete(key)
+        JSON1 = {
+         'key': key,
+         'value': None, 
+         'command': "DELETE: {}".format(key),
+         'result': True
+         }
+        return JSON1, 200 
+    else:
+        JSON = {
+         'key': key,
+         'value': None, 
+         'command': "DELETE: {}".format(key),
+         'result': False,
+         'error':"Unable to retrieve, key does not exist",
+         }
+
+    return JSON, 404 
+
+@app.route('/get', methods=['GET'])
+def test2():
+    return jsonify({'message' : 'It works!'})
 
 	
 #--------------md5 hash converter--------------#
