@@ -1,14 +1,10 @@
-#--------------CLI--------------#
-#imports needed to run the code
 import requests
 import sys
 import argparse
 import textwrap
 
-#IP address to the VM
 HOST = "34.121.122.205"
 
-#The pop up that will show the options and knowing to add h for help
 parser = argparse.ArgumentParser( 
     formatter_class=argparse.RawDescriptionHelpFormatter,description=textwrap.dedent('''
                               ~ Group 1 Tool Commands ~
@@ -18,14 +14,12 @@ parser = argparse.ArgumentParser(
 			       md5 - use: md5 -> string
 			   factorial - use: factorial -> num
 			   fibonacci - use: fibonacci -> num
-			      prime - use: is-prime -> num
+			    is-prime - use: is-prime -> num
 			kyeval - use: keyval-Redis_options -> string'''))
 			
 parser.print_help()
 
 subparsers = parser.add_subparsers(help='commands', dest='cli')
-
-###if __name__ == '__main__':####
 
 #Creating all parsers for the API functions
 #md5
@@ -41,7 +35,7 @@ fib_parser = subparsers.add_parser('fibonacci', help='Returns fibbonacci value')
 fib_parser.add_argument('fib_integer', help='Returns fibbonacci value', action='store')
 
 #is-prime
-prime_parser = subparsers.add_parser('prime', help='Returns a true or false')
+prime_parser = subparsers.add_parser('is-prime', help='Returns a true or false')
 prime_parser.add_argument('prime_integer', help='Returns a true or false', action='store')
 
 #keyval 
@@ -54,31 +48,24 @@ keyval_parser.add_argument('-delete', help='Use to delete key (and value) suppli
 
 
 args = parser.parse_args()
-#parser for md5
-def md5():
-    if args.cli == 'md5':
-        input_md5string = args.md5_string
-        md5=requests.get(HOST + input_md5string)
-        print(md5.text)
-#parser for factorial
+
+
+def md5(user_str):
+    md5=requests.get(f'http://{HOST}/md5/{user_str}')
+    print(md5.text)
+
 def factorial():
-    if args.cli == 'factorial':
-        input_factint = args.fact_int
-        factorial=requests.get(HOST + input_factint)
-        print(factorial.text)
-#parser for fibonacci
+    factorial=requests.get(f'http://{HOST}/factorial/{user_int}')
+    print(factorial.text)
+	
 def fibonacci():
-    if args.cli == 'fibonacci':
-        input_fibint = args.fib_int
-        fibonacci=requests.get(HOST + input_fibint)
-        print(fibonacci.text)
-#parser for prime
+    fibonacci=requests.get(f'http://{HOST}/fibonacci/{user_int}')
+    print(fibonacci.text)
+
 def prime():
-    if args.cli == 'prime':
-        input_primeint = args.prime_int
-        prime=requests.get(HOST+input_primeint)
-        print(prime.text)
-#parser for keyvals
+    prime=requests.get(f'http://{HOST}/is-prime/{user_int}')
+    print(prime.text)
+
 def keyval():
     if args.cli == 'keyval':
         if args.cli == '-post':
@@ -97,3 +84,16 @@ def keyval():
         else:
             print('Specify the Redis command you want to use')
 
+
+
+if args.cli == 'md5':
+    md5(args.md5_string)
+
+if args.cli == 'factorial':
+    factorial(args.fact_int)
+
+if args.cli == 'fibonacci':
+    fibonacci(args.fib_int)
+
+if args.cli == 'is-prime':
+    prime(args.prime_int)
