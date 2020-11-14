@@ -54,15 +54,15 @@ def md5(user_str):
     md5=requests.get(f'http://{HOST}/md5/{user_str}')
     print(md5.text)
 
-def factorial():
+def factorial(user_int):
     factorial=requests.get(f'http://{HOST}/factorial/{user_int}')
     print(factorial.text)
 	
-def fibonacci():
+def fibonacci(user_int):
     fibonacci=requests.get(f'http://{HOST}/fibonacci/{user_int}')
     print(fibonacci.text)
 
-def prime():
+def prime(user_int):
     prime=requests.get(f'http://{HOST}/is-prime/{user_int}')
     print(prime.text)
 
