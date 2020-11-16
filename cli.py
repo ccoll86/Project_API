@@ -90,10 +90,10 @@ if args.cli == 'md5':
     md5(args.md5_string)
 
 if args.cli == 'factorial':
-    factorial(args.fact_int)
+    factorial(args.fact_integer)
 
 if args.cli == 'fibonacci':
-    fibonacci(args.fib_int)
+    fibonacci(args.fib_integer)
 
 if args.cli == 'is-prime':
-    prime(args.prime_int)
+    prime(args.prime_integer)
