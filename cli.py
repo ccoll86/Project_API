@@ -97,11 +97,3 @@ if args.cli == 'fibonacci':
 
 if args.cli == 'is-prime':
     prime(args.prime_integer)
-
-if args.cli == '-post':
-
-if args.cli == '-get':
-
-if args.cli == '-put':
-
-if args.cli == '-delete':
