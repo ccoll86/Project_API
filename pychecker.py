@@ -49,34 +49,34 @@ def keyvalDELETE():
     jeep = 'jeep2'
     escape = 'escape3'
     keyvalDELETE=requests.delete(f'http://{HOST}/keyval/jeep2') 
-        if keyvalDELETE.status_code == 200:
-            value = keyvalDELETE.json()['result']
-            if value == True:
-                successful_tests +=1
-                print("Success, keyval DELETE is correct!")
-            else:
-                error +=1
-                print("Unsuccessful, keyval DELETE is wrong") 
+    if keyvalDELETE.status_code == 200:
+        value = keyvalDELETE.json()['result']
+        if value == True:
+            successful_tests +=1
+            print("Success, keyval DELETE is correct!")
         else:
             error +=1
-            print("Unsuccessful, this is the response code ", str(keyvalDELETE.status_code)) 
+            print("Unsuccessful, keyval DELETE is wrong") 
+    else:
+        error +=1
+        print("Unsuccessful, this is the response code ", str(keyvalDELETE.status_code)) 
 
 def keyvalPUT():
     jeep = 'jeep2'
     escape = 'escape3'
     data = {'key':jeep, 'value':escape}  
     keyvalPUT=requests.put(f'http://{HOST}/keyval',json=data) 
-        if keyvalPOST.status_code == 200:
-            value = keyvalPUT.json()['key']
-            if value == jeep:
-                successful_tests +=1
-                print("Success, keyval PUT is correct!")
-            else:
-                error +=1
-                print("Unsuccessful, keyval PUT is wrong") 
+    if keyvalPOST.status_code == 200:
+        value = keyvalPUT.json()['key']
+        if value == jeep:
+            successful_tests +=1
+            print("Success, keyval PUT is correct!")
         else:
             error +=1
-            print("Unsuccessful, this is the response code ", str(keyvalPUT.status_code))
+            print("Unsuccessful, keyval PUT is wrong") 
+    else:
+        error +=1
+        print("Unsuccessful, this is the response code ", str(keyvalPUT.status_code))
 
 #md5 testing
 print("Beginning md5 Test!")
