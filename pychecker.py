@@ -175,5 +175,5 @@ def slackalert():
 
 
 #Calculating final scores
-print("Errors found: ", errors, "Successful tests: ", successful_tests, "out of ", all_tests)
+print("Errors found: ", str(errors), "Successful tests: ", str(successful_tests), "out of ", str(all_tests))
 print("Total grade is: ", str((successful_tests / all_tests)*100), "%" )
