@@ -66,21 +66,21 @@ def prime(user_int):
     prime=requests.get(f'http://{HOST}/is-prime/{user_int}')
     print(prime.text)
 
-def keyval():
+def keyval(user_str):
     if args.cli == 'keyval':
         if args.cli == '-post':
             input_keystr = args.keyval_parser
-            r=requests.get(HOST + input_keystr)
+            r=requests.get(f'http://{HOST}/POST/{user_str}')
             print(r.text)
         if args.cli == '-get':
             input_keystr = args.keyval_parser
-            r=requests.get(HOST + input_keystr)
+            r=requests.get(f'http://{HOST}/GET/{user_str}')
         if args.cli == 'put':
             input_keystr = args.keyval_parser
-            r=requests.get(HOST + input_keystr)
+            r=requests.get(f'http://{HOST}/PUT/{user_str}')
         if args.cli == '-delete':
             input_keystr = args.keyval_parser
-            r=requests.get(HOST + input_keystr)
+            r=requests.get(f'http://{HOST}/DELETE/{user_str}')
         else:
             print('Specify the Redis command you want to use')
 
@@ -97,3 +97,11 @@ if args.cli == 'fibonacci':
 
 if args.cli == 'is-prime':
     prime(args.prime_integer)
+
+if args.cli == '-post':
+
+if args.cli == '-get':
+
+if args.cli == '-put':
+
+if args.cli == '-delete':
