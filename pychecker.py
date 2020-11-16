@@ -35,7 +35,7 @@ def keyvalGET():
         keyvalGET=requests.get(f'http://{HOST}{path}')
         if keyvalGET.status_code == 200:
             value = keyvalGET.json()['key']
-            if value == result
+            if value == result:
                 successful_tests +=1
                 print("Success, keyval GET is correct!")
             else:
