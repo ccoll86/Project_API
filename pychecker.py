@@ -8,10 +8,29 @@ HOST = "http://34.121.122.205:5000"
 #Calculated final testing
 errors= 0
 successful_tests= 0
-all_tests = 9
+all_tests = 19
 
 #Keyval tests
 print("Beginning Keyval Tests!")
+
+#GET
+def keyvalGET():
+    total = {'/keyval/test1':'test1'}
+    for path, result in total.items():
+        keyvalGET=requests.get(f'http://{HOST}{path}')
+        if keyvalGET.status_code == 200:
+            value = keyvalGET.json()['key']
+            if value == result:
+                successful_tests +=1
+                print("Success, keyval GET is correct!")
+            else:
+                error +=1
+                print("Unsuccessful, keyval GET is wrong")
+        else:
+            error +=1
+            print("Unsuccessful, this is the response code ", str(keyvalGET.status_code))
+
+#POST           
 def keyvalPOST():
     jeep = 'jeep2'
     escape = 'escape'
@@ -29,59 +48,46 @@ def keyvalPOST():
         error +=1
         print("Unsuccessful, this is the response code ", str(keyvalPOST.status_code))
 
-def keyvalGET():
-    total = {'/keyval/test1':'test1'}
-    for path, result in total.items():
-        keyvalGET=requests.get(f'http://{HOST}{path}')
-        if keyvalGET.status_code == 200:
-            value = keyvalGET.json()['key']
-            if value == result
-                successful_tests +=1
-                print("Success, keyval GET is correct!")
-            else:
-                error +=1
-                print("Unsuccessful, keyval GET is wrong")
-        else:
-            error +=1
-            print("Unsuccessful, this is the response code ", str(keyvalGET.status_code))
-
+#DELETE
 def keyvalDELETE():
     jeep = 'jeep2'
     escape = 'escape3'
     keyvalDELETE=requests.delete(f'http://{HOST}/keyval/jeep2') 
-        if keyvalDELETE.status_code == 200:
-            value = keyvalDELETE.json()['result']
-            if value == True:
-                successful_tests +=1
-                print("Success, keyval DELETE is correct!")
-            else:
-                error +=1
-                print("Unsuccessful, keyval DELETE is wrong") 
+    if keyvalDELETE.status_code == 200:
+        value = keyvalDELETE.json()['result']
+        if value == True:
+            successful_tests +=1
+            print("Success, keyval DELETE is correct!")
         else:
             error +=1
-            print("Unsuccessful, this is the response code ", str(keyvalDELETE.status_code)) 
+            print("Unsuccessful, keyval DELETE is wrong") 
+    else:
+        error +=1
+        print("Unsuccessful, this is the response code ", str(keyvalDELETE.status_code)) 
 
+#PUT
 def keyvalPUT():
     jeep = 'jeep2'
     escape = 'escape3'
     data = {'key':jeep, 'value':escape}  
-    keyvalPUT=requests.put(f'http://{HOST}/keyval',json=data) 
-        if keyvalPOST.status_code == 200:
-            value = keyvalPUT.json()['key']
-            if value == jeep:
-                successful_tests +=1
-                print("Success, keyval PUT is correct!")
-            else:
-                error +=1
-                print("Unsuccessful, keyval PUT is wrong") 
+    keyvalPUT=requests.put(f'http://{HOST}/keyval', json=data) 
+    if keyvalPOST.status_code == 200:
+        value = keyvalPUT.json()['value']
+        if value == escape:
+            successful_tests +=1
+            print("Success, keyval PUT is correct!")
         else:
             error +=1
-            print("Unsuccessful, this is the response code ", str(keyvalPUT.status_code))
+            print("Unsuccessful, keyval PUT is wrong") 
+    else:
+        error +=1
+        print("Unsuccessful, this is the response code ", str(keyvalPUT.status_code))
+
 
 #md5 testing
 print("Beginning md5 Test!")
 def md5():
-    total = {'/md5/test': '', '/md5/testtesttest': '', '/md5/tester': ''}
+    total = {'/md5/test': '098f6bcd4621d373cade4e832627b4f6', '/md5/testtesttest': '1fb0e331c05a52d5eb847d6fc018320d', '/md5/tester': 'f5d1278e8109edd94e1e4197e04873b9'}
     for path, result in total.items():
         md5=requests.get(f'http://{HOST}{path}')
         if md5.status_code == 200:
@@ -175,5 +181,6 @@ def slackalert():
 
 
 #Calculating final scores
-print("Errors found: ", str(errors), "Successful tests: ", str(successful_tests), "out of ", str(all_tests))
+print("Errors found: ", str(errors))
+print("Successful tests: ", str(successful_tests), "out of", str(all_tests))
 print("Total grade is: ", str((successful_tests / all_tests)*100), "%" )
